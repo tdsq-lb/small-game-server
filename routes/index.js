@@ -32,4 +32,18 @@ router.post('/ranking', function (req, res, next) {
   })
 })
 
+router.post('/check', function (req, res, next) {
+  const { uid } = req.body
+  const promise = new Promise((resolve, reject) => {
+    db.query(`CALL p_check_user('${uid}')`, [], (res, fie) => {
+      resolve(res)
+    })
+  })
+  promise.then((resolve) => {
+    res.send(resolve)
+  }).catch((err) => {
+    res.send(err)
+  })
+})
+
 module.exports = router;
