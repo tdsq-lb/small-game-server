@@ -14,9 +14,8 @@ router.post('/keep', function (req, res, next) {
   promise.then((resolve) => {
     res.send(resolve)
   }).catch((err) => {
-    res.send
+    res.send(err)
   })
-  // res.render('index', { title: 'Express' });
 });
 
 module.exports = router;
