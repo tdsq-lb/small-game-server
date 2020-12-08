@@ -18,4 +18,18 @@ router.post('/keep', function (req, res, next) {
   })
 });
 
+router.post('/ranking', function (req, res, next) {
+  const { type } = req.body
+  const promise = new Promise((resolve, reject) => {
+    db.query(`CALL p_ranking_list('${type}')`, [], (res, fie) => {
+      resolve(res)
+    })
+  })
+  promise.then((resolve) => {
+    res.send(resolve)
+  }).catch((err) => {
+    res.send(err)
+  })
+})
+
 module.exports = router;
