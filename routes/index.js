@@ -6,9 +6,9 @@ const db = require('../config/db')
 router.post('/keep', function (req, res, next) {
   console.log(req.body)
   const { uid, name, avatar, score, coin, level } = req.body
-  console.log(level ? level : '0,0,0,0,0', '=========>>')
+  console.log(coin == 0 ? undefined : coin,'===========>>>')
   const promise = new Promise((resolve, reject) => {
-    db.query(`CALL p_Insert_data('${uid}', '${name}', '${avatar}', '${score}', '${coin}', '${level}')`, [], (res, fie) => {
+    db.query(`CALL p_Insert_data('${uid}', '${name}', '${avatar}', '${score}', '${coin == 0 ? undefined : coin}', '${level}')`, [], (res, fie) => {
       resolve(res)
     })
   })
