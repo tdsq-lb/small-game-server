@@ -20,9 +20,10 @@ router.post('/keep', function (req, res, next) {
 });
 
 router.post('/ranking', function (req, res, next) {
-  const { type } = req.body
+  const { type, uid } = req.body
+  console.log(uid,'==========>>>')
   const promise = new Promise((resolve, reject) => {
-    db.query(`CALL p_ranking_list('${type}')`, [], (res, fie) => {
+    db.query(`CALL p_ranking_list('${type}','${uid}')`, [], (res, fie) => {
       resolve(res)
     })
   })

@@ -15,7 +15,8 @@ module.exports = {
           console.log('数据操作失败');
           throw err;
         }
-        let data = JSON.parse(JSON.stringify(results))[0]
+        let data = JSON.parse(JSON.stringify(results))
+        data.pop();
         if (data.length <= 0) {
           data.push({ code: 500 })
         }
@@ -31,5 +32,5 @@ module.exports = {
         });
       });
     });
-  }
+  },
 }
