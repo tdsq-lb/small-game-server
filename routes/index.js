@@ -21,7 +21,7 @@ router.post('/keep', function (req, res, next) {
 
 router.post('/ranking', function (req, res, next) {
   const { type, uid } = req.body
-  console.log(uid,'==========>>>')
+  console.log(uid, '==========>>>')
   const promise = new Promise((resolve, reject) => {
     db.query(`CALL p_rocket_ranking_list('${type}','${uid}')`, [], (res, fie) => {
       resolve(res)
@@ -38,6 +38,20 @@ router.post('/check', function (req, res, next) {
   const { uid } = req.body
   const promise = new Promise((resolve, reject) => {
     db.query(`CALL p_rocket_check_user('${uid}')`, [], (res, fie) => {
+      resolve(res)
+    })
+  })
+  promise.then((resolve) => {
+    res.send(resolve)
+  }).catch((err) => {
+    res.send(err)
+  })
+})
+
+router.post('/before', function (req, res, next) {
+  const { uid } = req.body
+  const promise = new Promise((resolve, reject) => {
+    db.query(`CALL p_rocket_before_list('${uid}')`, [], (res, fie) => {
       resolve(res)
     })
   })
