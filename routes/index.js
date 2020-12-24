@@ -62,4 +62,18 @@ router.post('/before', function (req, res, next) {
   })
 })
 
+router.post('/update', function (req, res, next) {
+  const { uid, newuid, name, avatar } = req.body
+  const promise = new Promise((resolve, reject) => {
+    db.query(`CALL p_rocket_update_list('${uid}','${newuid}','${name}','${avatar}')`, [], (res, fie) => {
+      resolve(res)
+    })
+  })
+  promise.then((resolve) => {
+    res.send(resolve)
+  }).catch((err) => {
+    res.send(err)
+  })
+})
+
 module.exports = router;
