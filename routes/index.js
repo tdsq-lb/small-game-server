@@ -70,7 +70,7 @@ router.post('/update', function (req, res, next) {
     })
   })
   promise.then((resolve) => {
-    res.send(resolve)
+    res.send(resolve[0])
   }).catch((err) => {
     res.send(err)
   })
