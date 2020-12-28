@@ -76,4 +76,18 @@ router.post('/update', function (req, res, next) {
   })
 })
 
+router.post('/event', function (req, res, next) {
+  const { event_name = '', game_id = '', path1 = '', path2 = '', path3 = '', path4 = '', path5 = '', uid = '' } = req.body
+  const promise = new Promise((resolve, reject) => {
+    db.query(`CALL p_event_insert('${event_name}','${game_id}','${path1}','${path2}','${path3}','${path4}','${path5}','${uid}')`, [], (res, fie) => {
+      resolve(res)
+    })
+  })
+  promise.then((resolve) => {
+    res.send(resolve[0])
+  }).catch((err) => {
+    res.send(err)
+  })
+})
+
 module.exports = router;
